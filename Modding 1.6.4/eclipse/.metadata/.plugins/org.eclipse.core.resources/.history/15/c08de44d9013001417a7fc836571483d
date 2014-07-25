@@ -1,0 +1,36 @@
+package com.LordOf20th.morereliquaries.biomes;
+
+import java.util.Random;
+
+import com.LordOf20th.morereliquaries.common.MoreReliquaries;
+
+import net.minecraft.block.Block;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenTrees;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
+public class BiomeDivineOverworld extends BiomeGenBase
+{
+
+	public BiomeDivineOverworld(int id)
+	{
+		super(id);
+		this.topBlock = (byte)Block.grass.blockID;
+		this.fillerBlock = (byte)Block.dirt.blockID;
+		this.waterColorMultiplier = 0x0B3861;
+		this.theBiomeDecorator.treesPerChunk = 10;
+		this.theBiomeDecorator.generateLakes = true;
+		this.theBiomeDecorator.grassPerChunk = 0;
+	}
+
+	public int getBiomeGrassColor()
+	{
+
+		return 0xFF0C00;
+	}
+
+	public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+	{
+		return (WorldGenerator)(par1Random.nextInt(5) == 0 ? new WorldGenTrees(false, 4, 2, 2, false) : (par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : new WorldGenTrees(false, 4, 0, 0, false)));
+	}
+}

@@ -1,0 +1,123 @@
+package com.LordOf20th.morereliquaries.common;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
+
+import com.LordOf20th.morereliquaries.blocks.BlockDivineDirt;
+import com.LordOf20th.morereliquaries.blocks.BlockDivineLeaves;
+import com.LordOf20th.morereliquaries.blocks.BlockDivineLog;
+import com.LordOf20th.morereliquaries.blocks.BlockDivineSapling;
+import com.LordOf20th.morereliquaries.blocks.BlockOreDivine;
+import com.LordOf20th.morereliquaries.proxy.MRCommonProxy;
+import com.LordOf20th.morereliquaries.world.MRTreeGrowEvent;
+import com.LordOf20th.morereliquaries.world.WorldGenMRTree;
+
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+
+@Mod(modid = "morereliquaries", name = "More Reliquaries", version = "0.1.0", acceptedMinecraftVersions = "[1.6.4,)")
+@NetworkMod(clientSideRequired = true, serverSideRequired = true)
+public class MoreReliquaries
+{
+	@SidedProxy(clientSide = "com.LordOf20th.morereliquaries.proxy.MRClientProxy", serverSide = "com.LordOf20th.morereliquaries.proxy.MRCommonProxy")
+	public static MRCommonProxy proxy;
+
+	@Instance("MoreReliquaries")
+	public static MoreReliquaries instance;
+	public static Block oreDivine;
+	public static Block divineLog;
+	public static Block divineLeaves;
+	public static Block divineSapling;
+	public static Block divineGrass;
+	public static Block divineDirt;
+
+	@EventHandler
+	public void PreInit(FMLPreInitializationEvent event)
+	{
+		// Configuration
+		// On définit la config
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+
+		// On la charge
+		config.load();
+		int oreDivineID = config.getBlock("oreDivineBlock", 2500).getInt();
+		int divineLogID = config.getBlock("divineLog", 2501).getInt();
+		int divineLeavesID = config.getBlock("divineLeaves", 2502).getInt();
+		int divineSaplingID = config.getBlock("divineSapling", 2503).getInt();
+		int divineDirtID = config.getBlock("divineDirt", 2504).getInt();
+
+		// On la sauvegarde
+		config.save();
+		// Blocks
+		oreDivine = new BlockOreDivine(oreDivineID).setTextureName("morereliquaries:ore_divine").setLightValue(0.3F).setResistance(10.0F).setHardness(5.0F).setUnlocalizedName("Divine Ore");
+		divineLog = new BlockDivineLog(divineLogID).setTextureName("morereliquaries:divine_log").setUnlocalizedName("Divine Log");
+		divineLeaves = new BlockDivineLeaves(divineLeavesID).setTextureName("morereliquaries:divine_leaves").setUnlocalizedName("Divine Leaves");
+		divineSapling = new BlockDivineSapling(divineSaplingID).setTextureName("morereliquaries:divine_sapling").setUnlocalizedName("Divine Sapling");
+		divineDirt = new BlockDivineDirt(divineDirtID).setTextureName("morereliquaries:divine_dirt").setUnlocalizedName("Divine Dirt");
+		// Items
+
+		// Achievements
+		
+		/** Event's **/
+		MinecraftForge.EVENT_BUS.register(new MRTreeGrowEvent());
+	}
+
+	@EventHandler
+	public void Init(FMLInitializationEvent event)
+	{
+		// Registry
+		GameRegistry.registerBlock(oreDivine, "Divine Ore");
+		LanguageRegistry.addName(oreDivine, "Divine Ore");
+
+		GameRegistry.registerBlock(divineLog, "Divine Log");
+		LanguageRegistry.addName(divineLog, "Divine Log");
+
+		GameRegistry.registerBlock(divineLeaves, "Divine Leaves");
+		LanguageRegistry.addName(divineLeaves, "Divine Leaves");
+
+		GameRegistry.registerBlock(divineSapling, "Divine Sapling");
+		LanguageRegistry.addName(divineSapling, "Divine Sapling");
+
+		GameRegistry.registerBlock(divineDirt, "Divine Dirt");
+		LanguageRegistry.addName(divineDirt, "Divine Dirt");
+		// Mobs
+        EntityRegistry.registerModEntity(EntitySoul.class, "soul mob", 1, this, 80, 3, true);
+        
+        for (int i = 0; i < BiomeGenBase.biomeList.length; i++)
+        {
+            if (BiomeGenBase.biomeList[i] != null)
+            {
+                EntityRegistry.addSpawn(EntitySoul.class, 10, 1, 3, EnumCreatureType.monster, BiomeGenBase.biomeList[i]);
+            }
+        }
+ 
+        LanguageRegistry.instance().addStringLocalization("entity.YourName_ModName.tutorial mob.name", "Tutorial Mob");
+    	}
+		// Render
+		proxy.registerRender();
+		// NetWork
+		
+		// Recipe
+
+	}
+
+	@EventHandler
+	public void PostInit(FMLPostInitializationEvent event)
+	{
+		// Intégration avec les autres mods
+
+	}
+}

@@ -1,0 +1,15 @@
+package com.LordOf20th.morereliquaries.blocks;
+
+import com.jcraft.jorbis.Block;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+
+public class oreDivine extends Block
+{
+	public oreDivine(int id)
+	{
+		super(id, Material.rock);
+		this.setCreativeTab(CreativeTabs.tabBlock);
+	};
+}

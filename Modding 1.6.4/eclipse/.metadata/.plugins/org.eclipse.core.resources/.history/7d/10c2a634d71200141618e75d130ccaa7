@@ -1,0 +1,43 @@
+package com.LordOf20th.morereliquaries.blocks;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.Icon;
+
+public class BlockDivineLog extends Block
+{
+
+	public BlockDivineLog(int id)
+	{
+		super(id, Material.wood);
+		this.setCreativeTab(CreativeTabs.tabBlock);
+	}
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister par1IconRegister)
+    {
+    	this.icon_top = par1IconRegister.registerIcon(this.getTextureName() + "_top");
+    	this.icon_side = par1IconRegister.registerIcon(this.getTextureName() + "_side");
+    	this.icon_bot = par1IconRegister.registerIcon(this.getTextureName() + "_bot");
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public Icon getIcon(int par1, int par2)
+    {
+        if (par1 == 0)
+        {
+        	return this.icon_bot;
+        }
+        else if (par1 == 1)
+        {
+        	return this.icon_top;
+        }
+        else
+        {
+        	return this.icon_side;
+        }    
+     }
+}

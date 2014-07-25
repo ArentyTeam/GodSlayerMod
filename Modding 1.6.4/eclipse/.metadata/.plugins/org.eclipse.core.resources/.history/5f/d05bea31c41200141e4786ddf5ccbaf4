@@ -1,0 +1,12 @@
+package com.LordOf20th.morereliquaries.blocks;
+
+import com.jcraft.jorbis.Block;
+import com.jcraft.jorbis.DspState;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+
+public class BlockOreDivine extends Block
+{
+
+}

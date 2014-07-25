@@ -1,0 +1,18 @@
+package com.LordOf20th.morereliquaries.mobs;
+
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.world.World;
+
+public class EntitySoul extends EntityMob
+{
+
+	public EntitySoul(World par1World)
+	{
+		super(par1World);
+	}
+
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
+	    return EnumCreatureAttribute.UNDEAD;
+	}
+}

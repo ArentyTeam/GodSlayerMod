@@ -1,0 +1,18 @@
+package com.LordOf20th.morereliquaries.world;
+
+public class MRTreeGrowEvent
+{
+private int BlockID;
+/** Used to make the sapling grow the tree **/
+@ForgeSubscribe
+public void bonemealUsed(BonemealEvent event)
+{
+	if(event.ID == ModCraftech.TutorialSapling.blockID)
+
+{
+		System.out.println("test2");
+((BlockTutorialSapling)ModCraftech.TutorialSapling).growTree(event.world, event.X, event.Y, event.Z, event.world.rand);
+event.setResult(Result.ALLOW);
+}
+}
+}

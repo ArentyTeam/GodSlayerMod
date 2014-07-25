@@ -1,0 +1,26 @@
+package com.LordOf20th.morereliquaries.biomes;
+
+import com.LordOf20th.morereliquaries.common.MoreReliquaries;
+
+import net.minecraft.block.Block;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenerator;
+
+public class BiomeDivineOverworld extends BiomeGenBase
+{
+
+	public BiomeDivineOverworld(int id)
+	{
+		super(id);
+		this.topBlock = (byte)MoreReliquaries.divineGrass.blockID;
+		this.fillerBlock = (byte)MoreReliquaries.divineDirt.blockID;
+		this.waterColorMultiplier = 0x0B3861;
+		this.theBiomeDecorator.treesPerChunk = 10;
+
+	}
+
+	public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
+	{
+		return (WorldGenerator)(par1Random.nextInt(5) == 0 ? new WorldGenTrees(false, 4, 2, 2, false) : (par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : new WorldGenTrees(false, 4, 0, 0, false)));
+	}
+}

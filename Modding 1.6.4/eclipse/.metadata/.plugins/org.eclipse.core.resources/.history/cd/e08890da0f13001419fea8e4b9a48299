@@ -1,0 +1,8 @@
+package com.LordOf20th.morereliquaries.blocks;
+
+import net.minecraft.block.BlockLeaves;
+
+public class BlockDivineLeaves extends BlockLeaves
+{
+
+}

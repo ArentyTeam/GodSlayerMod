@@ -1,0 +1,16 @@
+package com.LordOf20th.morereliquaries.blocks;
+
+import net.minecraft.block.BlockLeaves;
+
+public class BlockDivineLeaves extends BlockLeaves
+{
+
+	protected BlockDivineLeaves(int id)
+	{
+		super(id, Material.leaves);
+		setCreativeTab(CreativeTabs.tabDecoration);
+                this.setTickRandomly(true);
+                this.setBurnProperties(this.blockID, 5, 20);
+	}
+
+}

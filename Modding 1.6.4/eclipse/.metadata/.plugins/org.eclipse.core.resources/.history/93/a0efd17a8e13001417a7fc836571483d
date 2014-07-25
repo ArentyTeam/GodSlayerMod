@@ -1,0 +1,18 @@
+package com.LordOf20th.morereliquaries.biomes;
+
+import com.LordOf20th.morereliquaries.common.MoreReliquaries;
+
+import net.minecraft.block.Block;
+import net.minecraft.world.biome.BiomeGenBase;
+
+public class BiomeDivineOverworld extends BiomeGenBase
+{
+
+	public BiomeDivineOverworld(int id)
+	{
+		super(id);
+		this.topBlock = (byte)MoreReliquaries.divineGrass.blockID;
+		this.fillerBlock = (byte)MoreReliquaries.divineDirt.blockID;
+		this.waterColorMultiplier = 0x0B3861;
+	}
+}

@@ -1,0 +1,16 @@
+package com.LordOf20th.morereliquaries.blocks;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+
+public class BlockDivineSapling extends Block
+{
+
+	public BlockDivineSapling(int id)
+	{
+		super(id, Material.wood);
+		// TODO Auto-generated constructor stub
+	}
+
+
+}

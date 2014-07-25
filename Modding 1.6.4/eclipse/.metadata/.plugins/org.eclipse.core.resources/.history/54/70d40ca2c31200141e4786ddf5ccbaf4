@@ -1,0 +1,11 @@
+package com.LordOf20th.morereliquaries.blocks;
+
+import net.minecraft.block.material.Material;
+
+public class oreDivine
+{
+	public oreDivine(int par1, Material par2Material)
+	{
+		super(par1, par2Material);
+	}
+}

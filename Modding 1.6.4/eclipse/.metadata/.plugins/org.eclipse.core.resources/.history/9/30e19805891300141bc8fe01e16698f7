@@ -1,0 +1,11 @@
+package com.LordOf20th.morereliquaries.biomes;
+
+public class BiomeDivineOverworld 
+{
+
+	public BiomeDivineOverworld(int id)
+	{
+		// TODO Auto-generated constructor stub
+	}
+
+}

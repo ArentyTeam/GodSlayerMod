@@ -1,0 +1,96 @@
+package com.LordOf20th.morereliquaries.blocks;
+
+import com.LordOf20th.morereliquaries.common.MoreReliquaries;
+
+import scala.util.Random;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+public class BlockDivineLeaves extends BlockLeaves
+{
+
+	public BlockDivineLeaves(int id, Material material)
+	{
+		super(id);
+		setCreativeTab(CreativeTabs.tabDecorations);
+		this.setTickRandomly(true);
+		this.setBurnProperties(this.blockID, 5, 20);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getBlockColor()
+	{
+		double d0 = 1.0D;
+		double d1 = 0.5D;
+		return ColorizerFoliage.getFoliageColor(d0, d1);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getRenderColor(int par1)
+	{
+		return ColorizerFoliage.getFoliageColorBasic();
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	{
+
+		{
+			int i1 = 0;
+			int j1 = 0;
+			int k1 = 0;
+
+			for(int l1 = -1; l1 <= 1; ++l1)
+			{
+				for(int i2 = -1; i2 <= 1; ++i2)
+				{
+					int j2 = par1IBlockAccess.getBiomeGenForCoords(par2 + i2, par4 + l1).getBiomeFoliageColor();
+					i1 += (j2 & 16711680) >> 16;
+					j1 += (j2 & 65280) >> 8;
+					k1 += j2 & 255;
+				}
+			}
+
+			return (i1 / 9 & 255) << 16 | (j1 / 9 & 255) << 8 | k1 / 9 & 255;
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	{
+		if(par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && par5Random.nextInt(15) == 1)
+		{
+			double d0 = (double)((float)par2 + par5Random.nextFloat());
+			double d1 = (double)par3 - 0.05D;
+			double d2 = (double)((float)par4 + par5Random.nextFloat());
+			par1World.spawnParticle("dripWater", d0, d1, d2, 0.0D, 0.0D, 0.0D);
+		}
+	}
+
+	private void removeLeaves(World par1World, int par2, int par3, int par4)
+	{
+		this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
+		par1World.setBlockToAir(par2, par3, par4);
+	}
+
+	public int quantityDropped(Random par1Random)
+	{
+		return par1Random.nextInt(20) == 0 ? 1 : 0;
+	}
+
+	public int idDropped(int par1, Random par2Random, int par3)
+	{
+		return MoreReliquaries.BlockDivineSapling.blockID;
+	}
+
+	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
+	{
+		super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
+	}
+}

@@ -1,0 +1,13 @@
+package com.LordOf20th.morereliquaries.biomes;
+
+import net.minecraft.world.biome.BiomeGenBase;
+
+public class BiomeDivineOverworld extends BiomeGenBase
+{
+
+	public BiomeDivineOverworld(int id)
+	{
+		super(id);
+	}
+
+}
